@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index,follow">
+    <title>2048 Cupcakes GAME [2025 Updated]</title>
+    <meta name="description" content="2048 Cupcakes is a delightful variation of the well-known game 2048. This single-player puzzle game revolves around the theme of Cupcakes. The objective of the game is to slide numbered Cupcakes onto a grid, combining them to create new and more delicious Cupcakes.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <link rel="shortcut icon" href="/theme/img/2048cupcakes.ico">
+    <link href="/theme/css/main.min.css" rel="stylesheet" type="text/css">
+    <link href="/theme/css/2048.css" rel="stylesheet" type="text/css">
+    <style>
+        .data-setting{
+            position: relative;
+        }
+        .data-setting hr {
+            display: block;
+            width: 100%;
+            height: 2px;
+            margin: 12px 0;
+            border: none;
+            background: #e8ebf3;
+        }
+        .setting-title.toggle {
+            color: #2e3239;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 2px
+        }
+        .setting-desc.toggle {
+            text-align: left;
+            max-width: 84%;
+            display: inline-block
+        }
+        .setting-desc {
+            color: #818692;
+            font-size: 13px
+        }
+        .data-setting .checkbox {
+            width: 48px;
+            margin: -35px auto 0;
+            position: absolute;
+            right: 15px
+        }
+        .checkbox .label_check {
+            line-height: 0;
+            display: table-cell;
+            height: 24px;
+            vertical-align: top
+        }
+        .checkbox input[type=checkbox] {
+            display: none
+        }
+        .checkbox input[type=checkbox]+.check_text {
+            position: relative;
+            display: block;
+            width: 48px;
+            height: 26px;
+            cursor: pointer;
+            text-indent: -9999px;
+            border-radius: 100px;
+            background: #dbe0ed
+        }
+        .checkbox input[type=checkbox]:checked+.check_text{
+            background: #f67098;
+        }
+        .checkbox input[type=checkbox]:checked+.check_text:after {
+            left: 25px
+        }
+        .checkbox input[type=checkbox]+.check_text:after {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            content: '';
+            transition: .2s linear;
+            border-radius: 50%;
+            background: #fff
+        }
+        span.tile-text .hide{
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="page">
+    <div class="page__wrapper">
+
+        <div class="container">
+            <div class="headline">
+                <h1 class="headline__title">2048 Cupcakes</h1>
+                <div id="mode" aria-label="classic"  style="margin:auto;width:150px;cursor:pointer;text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);color: #f67098;font-weight: 800;font-size:21px;font-style: oblique;">Classic</div>
+
+                <div class="floating-window" style="display: none;">
+                    <div class="window-header">
+                        <span>More 2048 cupcakes</span>
+                        <button class="close-btn">X</button>
+                    </div>
+                    <div class="window-content">
+                        <div class="more-cupcakes">
+                            <div>
+                                <img alt="2048 cupcakes christmas" src="/theme/img/christmas/webp/2.webp">
+                                <div>Christmas</div>
+                                <a href="/christmas">Play</a>
+                            </div>
+                            <div>
+                                <img alt="2048 cupcakes Halloween" src="/theme/img/halloween/png/2.png">
+                                <div>Halloween</div>
+                                <a href="/halloween">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <section class="section section--main">
+            <div class="container no-pading">
+
+                <style>
+                    .score-container:after {
+                        content: "Score" !important;
+                    }
+
+                    .best-container:after {
+                        content: "Best" !important;
+                    }
+                </style>
+
+                <script>
+                    window.translations = {
+                        win: 'You win!',
+                        game_over: 'Game over!'
+                    };
+                </script>
+
+                <div class="gameplay-container">
+                    <div class="heading">
+                        <div class="scores-container">
+                            <div class="score-container">140
+                                <div class="score-addition">+140</div>
+                            </div>
+                            <div class="best-container">140</div>
+                        </div>
+                        <a class="restart-button">New Game</a>
+                    </div>
+                    <div class="data-setting">
+                        <hr>
+                        <div class="setting-title toggle">Hard Mode</div>
+                        <div class="setting-desc toggle">The small number label in the bottom right will be removed. Please choose carefully.</div>
+                        <div class="checkbox"><label class="label_check"><input type="checkbox" name="hard_mode" autocomplete="off"><span class="check_text"></span></label></div>
+                        <hr>
+                    </div>
+
+
+                    <div class="game-container">
+                        <div class="game-message">
+                            <p></p>
+                            <div class="lower">
+                                <a class="keep-playing-button">Keep going</a>
+                                <a class="retry-button">Try again</a>
+                                <div class="window-content">
+                                    <div class="more-cupcakes">
+                                        <div>
+                                            <img alt="2048 cupcakes christmas" src="/theme/img/christmas/webp/2.webp">
+                                            <div>Christmas</div>
+                                            <a href="/christmas">Play</a>
+                                        </div>
+                                        <div>
+                                            <img alt="2048 cupcakes Halloween" src="/theme/img/halloween/png/2.png">
+                                            <div>Halloween</div>
+                                            <a href="/halloween">Play</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid-container">
+                            <div class="grid-row">
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                            </div>
+                            <div class="grid-row">
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                            </div>
+                            <div class="grid-row">
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                            </div>
+                            <div class="grid-row">
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                                <div class="grid-cell"></div>
+                            </div>
+                        </div>
+
+                        <div class="tile-container">
+                            <div class="tile tile-4 tile-position-1-1 tile-new">
+                                <div class="tile-inner"><span class="tile-text">4</span></div>
+                            </div>
+                            <div class="tile tile-2 tile-position-1-2 tile-new">
+                                <div class="tile-inner">2</div>
+                            </div>
+                            <div class="tile tile-4 tile-position-1-3 tile-new">
+                                <div class="tile-inner">4</div>
+                            </div>
+                            <div class="tile tile-32 tile-position-2-1 tile-new">
+                                <div class="tile-inner">32</div>
+                            </div>
+                            <div class="tile tile-2 tile-position-2-3 tile-new">
+                                <div class="tile-inner">2</div>
+                            </div>
+                            <div class="tile tile-8 tile-position-3-1 tile-new">
+                                <div class="tile-inner">8</div>
+                            </div>
+                            <div class="tile tile-2 tile-position-4-3 tile-new">
+                                <div class="tile-inner">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" style="padding:40px 0 25px">
+                    <div class="banner banner_middle">
+                        <div id="ezoic-pub-ad-placeholder-103"></div>
+                    </div>
+                    <div class="banner banner_middle_mobile">
+                        <div id="ezoic-pub-ad-placeholder-108"></div>
+                    </div>
+                </div>
+
+                <section class="section section--grey" style="background:#faf8ef;">
+                    <div class="container">
+                        <div class="play2048-text" style="text-align:center">
+                            <h2 class="h2--center" style="margin-bottom:10px">How to Play 2048 Cupcakes</h2>
+                            <p>Use your arrow keys (also W, A, S, and D keys alternatively) or swipe with your fingers to move the 2048 Cupcakes tiles. For example, if you joined 2 tiles with the number 2 Cupcakes, they will become 4 Cupcakes, 2 Cupcakes tiles with 4 Cupcakes will become 8 Cupcakes, and so on. The point of the game is to get the 2048 Cupcakes tile!</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+
+    </div>
+
+        <section class="section" style="text-align:center;margin: auto;width: 50%;">
+            <h2>Changelog</h2>
+            <h3 class="text-center"><time class="entry-date updated td-module-date" datetime="2024-12-04T15:01:05+07:00">December 04, 2024</time></h3>
+            <div style="text-align: left;">
+                <div>December 04, 2024 - Add 2048 Cupcake halloween</div>
+                <div>December 03, 2024 - Add 2048 Cupcake Christmas</div>
+                <div>December 01, 2024 - Add Check box for 2048 Cupcake Numbers On/Off</div>
+                <div>July     01, 2024 - Add Number label: Each Cupcake tile has a small number label in the bottom-right corner.</div>
+            </div>
+
+        </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <a class="footer__logo" href="https://cupcakes2048.com/">
+                    <img src="/theme/img/2048cupcakes.ico" alt="2048 cupcakes">
+                </a>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__copir">cupcakes2048.com © 2024 All rights reserved.</div>
+                <ul class="footer__links">
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+    <script src="/theme/js/bind_polyfill.js"></script>
+    <script src="/theme/js/classlist_polyfill.js"></script>
+    <script src="/theme/js/animframe_polyfill.js"></script>
+    <script src="/theme/js/keyboard_input_manager.js"></script>
+    <script src="/theme/js/html_actuator.js"></script>
+    <script src="/theme/js/grid.js"></script>
+    <script src="/theme/js/tile.js"></script>
+    <script src="/theme/js/local_storage_manager.js"></script>
+    <script src="/theme/js/game_manager.js"></script>
+    <script src="/theme/js/application.js"></script>
+    <script src="/theme/js/mode.js"></script>
+
+</body>
+
+</html>
